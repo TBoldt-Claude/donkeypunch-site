@@ -4,23 +4,27 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Donkey Punch Hot Sauce</title>
-<meta name="description" content="Small-batch hot sauce made locally and sold at farmers markets. Find our market schedule or order by email.">
+<meta name="description" content="Small-batch Texas hot sauce. Find Donkey Punch every Sunday 10–2 at the Alamo Heights Farmers Market at the Quarry in San Antonio, or order by email.">
+<meta property="og:title" content="Donkey Punch Hot Sauce">
+<meta property="og:description" content="Fight fire with fire. Small-batch Texas hot sauce, every Sunday at the Alamo Heights Farmers Market.">
+<meta property="og:image" content="https://tboldt-claude.github.io/donkeypunch-site/images/donkey-punch-badge.jpg">
+<link rel="icon" href="images/boxing-donkey.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rye&family=Figtree:wght@400;600;800&display=swap">
 <style>
 /* Layout: market-stall price board. Bold stamped header, sauce "price tags" in a grid, a plain market list, then how to order. */
 :root{
   --paper:#F4F6FA; --card:#FFFFFF; --ink:#16202F; --muted:#5A6577;
-  --chili:#1F4E9C; --chili-ink:#FFFFFF; --heat:#E0A100; --line:#D9DEE8; --draft:#FFF1B8; --draft-ink:#5A4300;
+  --chili:#1E429A; --chili-ink:#FFFFFF; --heat:#E61D2F; --line:#D9DEE8; --draft:#FFF1B8; --draft-ink:#5A4300;
   --display:"Rye", Georgia, "Times New Roman", serif;
   --body:"Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
   --paper:#111826; --card:#18223A; --ink:#EEF2F8; --muted:#A7B2C4;
-  --chili:#3D78D8; --chili-ink:#FFFFFF; --heat:#F2B728; --line:#2A3650; --draft:#3B3214; --draft-ink:#F5DE8A; color-scheme:dark}}
+  --chili:#4A6FD1; --chili-ink:#FFFFFF; --heat:#FF4B5A; --line:#2A3650; --draft:#3B3214; --draft-ink:#F5DE8A; color-scheme:dark}}
 :root[data-theme="dark"]{
   --paper:#111826; --card:#18223A; --ink:#EEF2F8; --muted:#A7B2C4;
-  --chili:#3D78D8; --chili-ink:#FFFFFF; --heat:#F2B728; --line:#2A3650; --draft:#3B3214; --draft-ink:#F5DE8A; color-scheme:dark}
+  --chili:#4A6FD1; --chili-ink:#FFFFFF; --heat:#FF4B5A; --line:#2A3650; --draft:#3B3214; --draft-ink:#F5DE8A; color-scheme:dark}
 *,*::before,*::after{box-sizing:border-box}
 img{max-width:100%;height:auto}
 body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:1.05rem;line-height:1.6}
@@ -32,14 +36,16 @@ a{color:var(--chili)} a:focus-visible,button:focus-visible{outline:3px solid var
 .ph{background:var(--draft);color:var(--draft-ink);padding:0 .3em;border-radius:3px;font-weight:600}
 nav{border-bottom:1px solid var(--line)}
 nav .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;align-items:center;justify-content:space-between;padding-block:14px}
-.brand{font-family:var(--display);font-size:1.25rem;color:var(--ink);text-decoration:none}
+.brand{font-family:var(--display);font-size:1.25rem;color:var(--ink);text-decoration:none;display:flex;align-items:center;gap:10px}
+.brand img{width:40px;height:auto}
 nav ul{display:flex;flex-wrap:wrap;gap:6px 20px;list-style:none;margin:0;padding:0}
 nav ul a{color:var(--ink);text-decoration:none;font-weight:600}
 nav ul a:hover{color:var(--chili)}
 .hero{background:var(--chili);color:var(--chili-ink)}
 .hero .wrap{padding-block:48px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:18px 32px;align-items:center}
 .hero .copy{display:grid;gap:18px;min-width:0}
-.logo{width:clamp(120px,22vw,220px);aspect-ratio:1;max-width:100%;border-radius:50%;border:3px dashed var(--chili-ink);display:grid;place-items:center;text-align:center;font-weight:800;font-size:.9rem;padding:12px;opacity:.9}
+.logo{width:clamp(200px,32vw,340px);max-width:100%;height:auto;display:block}
+.hero .facts{font-weight:800;letter-spacing:.08em;text-transform:uppercase;font-size:.85rem;opacity:.9;margin:0}
 @media (max-width:640px){.hero .wrap{grid-template-columns:1fr}.logo{order:-1}}
 .hero h1{font-size:clamp(2.4rem,7vw,4.4rem);letter-spacing:.01em}
 .hero p{max-width:58ch;margin:0;font-size:1.15rem}
@@ -80,7 +86,7 @@ footer .wrap{padding-block:28px;display:flex;flex-wrap:wrap;gap:8px 24px;justify
 <div class="draft"><div class="wrap"><strong>Draft preview.</strong> Highlighted text in [brackets] is a placeholder waiting for Travis's real details.</div></div>
 
 <nav aria-label="Main"><div class="wrap">
-  <a class="brand" href="#top">Donkey Punch</a>
+  <a class="brand" href="#top"><img src="images/boxing-donkey.jpg" alt="" width="40" height="36">Donkey Punch</a>
   <ul>
     <li><a href="#sauces">Our sauces</a></li>
     <li><a href="#markets">Find us</a></li>
@@ -91,13 +97,14 @@ footer .wrap{padding-block:28px;display:flex;flex-wrap:wrap;gap:8px 24px;justify
 <header class="hero" id="top"><div class="wrap">
   <div class="copy">
   <h1>Donkey Punch Hot&nbsp;Sauce</h1>
-  <p>Small-batch hot sauce with a kick, made by hand <span class="ph">[in your town]</span> and sold at local farmers markets.</p>
+  <p class="facts">Fight fire with fire · Est. 2022 · Pearland, TX</p>
+  <p>Small-batch Texas hot sauce with a kick. Find us every Sunday at the Alamo Heights Farmers Market in San Antonio.</p>
   <div class="btns">
-    <a class="btn solid" href="#markets">See this week's markets</a>
+    <a class="btn solid" href="#markets">Where to find us</a>
     <a class="btn ghost" href="#order">Order a bottle</a>
   </div>
   </div>
-  <div class="logo" role="img" aria-label="Boxing Donkey logo goes here">[Boxing Donkey logo]</div>
+  <img class="logo" src="images/donkey-punch-badge.jpg" width="1080" height="1080" alt="Donkey Punch Hot Sauce badge: a boxing donkey in a red, white and blue diamond, with banners reading Est. 2022, Fight Fire With Fire, and Pearland, TX">
 </div></header>
 
 <section id="sauces"><div class="wrap">
@@ -128,11 +135,10 @@ footer .wrap{padding-block:28px;display:flex;flex-wrap:wrap;gap:8px 24px;justify
 
 <section id="markets" class="alt"><div class="wrap">
   <p class="eyebrow">Where to find us</p>
-  <h2>Farmers markets</h2>
-  <p class="lede">The easiest way to get our sauce is to meet us at one of our local markets. Come taste before you buy.</p>
+  <h2>Farmers market</h2>
+  <p class="lede">The easiest way to get our sauce is to meet us at the market. Come taste before you buy.</p>
   <ul class="markets">
-    <li><span class="day"><span class="ph">[Saturdays]</span></span><span class="where"><span class="ph">[Market name]</span><small><span class="ph">[8am–1pm · address]</span></small></span></li>
-    <li><span class="day"><span class="ph">[Sundays]</span></span><span class="where"><span class="ph">[Market name]</span><small><span class="ph">[9am–2pm · address]</span></small></span></li>
+    <li><span class="day">Every Sunday</span><span class="where">Alamo Heights Farmers Market<small>10am–2pm · The Quarry, San Antonio, TX</small></span></li>
   </ul>
 </div></section>
 
@@ -153,7 +159,7 @@ footer .wrap{padding-block:28px;display:flex;flex-wrap:wrap;gap:8px 24px;justify
 
 <footer><div class="wrap">
   <span>© 2026 Donkey Punch Hot Sauce</span>
-  <span><span class="ph">[Instagram]</span> · <span class="ph">[Facebook]</span></span>
+  <span><a href="https://www.instagram.com/donkeypunchhotsauce/">Instagram</a> · <a href="https://www.facebook.com/DonkeyPunchHotSauce">Facebook</a> · @DonkeyPunchHotSauce</span>
 </div></footer>
 </body>
 </html>
