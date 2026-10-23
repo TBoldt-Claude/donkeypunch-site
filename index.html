@@ -176,10 +176,11 @@ dialog#order-dialog::backdrop{background:rgba(10,20,50,.55)}
 
 <section id="markets" class="alt"><div class="wrap">
   <p class="eyebrow">Where to find us</p>
-  <h2>Farmers market</h2>
-  <p class="lede">The easiest way to get our sauce is to meet us at the market. Come taste before you buy.</p>
+  <h2>Markets &amp; pickup</h2>
+  <p class="lede">The easiest way to get our sauce is to meet us at the market and taste before you buy. Near Pearland? Order ahead and pick up locally.</p>
   <ul class="markets">
     <li><span class="day">Every Sunday</span><span class="where">Alamo Heights Farmers Market<small>10am–2pm · The Quarry, San Antonio, TX</small></span></li>
+    <li><span class="day">Local pickup</span><span class="where">Shadow Creek Ranch, Pearland, TX<small>Order by email and we'll set a pickup time</small></span></li>
   </ul>
 </div></section>
 
@@ -240,7 +241,8 @@ dialog#order-dialog::backdrop{background:rgba(10,20,50,.55)}
       <legend>How do you want it?</legend>
       <div class="radios">
         <label><input type="radio" name="how" value="ship" checked> Ship it</label>
-        <label><input type="radio" name="how" value="pickup"> Pick up at the Sunday market</label>
+        <label><input type="radio" name="how" value="pickup"> Pick up at the Sunday market (San Antonio)</label>
+        <label><input type="radio" name="how" value="pearland"> Local pickup in Shadow Creek Ranch, Pearland</label>
       </div>
     </fieldset>
     <div class="field" id="addr-field">
@@ -277,7 +279,7 @@ dialog#order-dialog::backdrop{background:rgba(10,20,50,.55)}
     document.getElementById('o-count').textContent=n+(n===1?' bottle':' bottles');
     var ship=how()==='ship', sc=ship?shipCost(n):0;
     document.getElementById('o-total').textContent='$'+(price(n)+(sc||0));
-    document.getElementById('o-ship').textContent=!ship?'Pay at the market':
+    document.getElementById('o-ship').textContent=!ship?(how()==='pearland'?'Pay at pickup':'Pay at the market'):
       n<1?'Shipping: $10 for 1–3 bottles, $20 for 4–10':
       sc===null?'$'+price(n)+' in sauce, plus a shipping quote we\'ll email you':
       '$'+price(n)+' in sauce + $'+sc+' USPS Flat Rate shipping';
@@ -309,7 +311,7 @@ dialog#order-dialog::backdrop{background:rgba(10,20,50,.55)}
     var body='Hi Donkey Punch,\n\nI\'d like to order:\n'+lines.join('\n')+
       '\n\n'+n+(n===1?' bottle':' bottles')+': $'+price(n)+
       (ship?(shipCost(n)===null?'\nShipping: please send me a quote (more than 10 bottles)':'\nShipping (USPS Flat Rate): $'+shipCost(n)+'\nTotal: $'+(price(n)+shipCost(n))):'\nTotal: $'+price(n))+
-      '\n\n'+(ship?'Please ship to:\n'+addr:'I\'ll pick up at the Alamo Heights Farmers Market on Sunday.')+
+      '\n\n'+(ship?'Please ship to:\n'+addr:how()==='pearland'?'I\'d like local pickup in Shadow Creek Ranch, Pearland. Let me know a good time.':'I\'ll pick up at the Alamo Heights Farmers Market on Sunday.')+
       (form.elements.notes.value.trim()?'\n\nNotes: '+form.elements.notes.value.trim():'')+
       '\n\nThanks,\n'+name;
     return {subject:'Sauce order from '+name,body:body};
