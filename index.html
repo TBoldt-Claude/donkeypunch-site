@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Donkey Punch Hot Sauce</title>
+<meta name="description" content="Small-batch hot sauce made locally and sold at farmers markets. Find our market schedule or order by email.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rye&family=Figtree:wght@400;600;800&display=swap">
+<style>
+/* Layout: market-stall price board. Bold stamped header, sauce "price tags" in a grid, a plain market list, then how to order. */
+:root{
+  --paper:#F4F6FA; --card:#FFFFFF; --ink:#16202F; --muted:#5A6577;
+  --chili:#1F4E9C; --chili-ink:#FFFFFF; --heat:#E0A100; --line:#D9DEE8; --draft:#FFF1B8; --draft-ink:#5A4300;
+  --display:"Rye", Georgia, "Times New Roman", serif;
+  --body:"Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#111826; --card:#18223A; --ink:#EEF2F8; --muted:#A7B2C4;
+  --chili:#3D78D8; --chili-ink:#FFFFFF; --heat:#F2B728; --line:#2A3650; --draft:#3B3214; --draft-ink:#F5DE8A; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#111826; --card:#18223A; --ink:#EEF2F8; --muted:#A7B2C4;
+  --chili:#3D78D8; --chili-ink:#FFFFFF; --heat:#F2B728; --line:#2A3650; --draft:#3B3214; --draft-ink:#F5DE8A; color-scheme:dark}
+*,*::before,*::after{box-sizing:border-box}
+img{max-width:100%;height:auto}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:1.05rem;line-height:1.6}
+.wrap{max-width:1040px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--display);font-weight:400;line-height:1.15;text-wrap:balance;margin:0}
+a{color:var(--chili)} a:focus-visible,button:focus-visible{outline:3px solid var(--heat);outline-offset:2px}
+.draft{background:var(--draft);color:var(--draft-ink);font-size:.9rem}
+.draft .wrap{padding-block:10px}
+.ph{background:var(--draft);color:var(--draft-ink);padding:0 .3em;border-radius:3px;font-weight:600}
+nav{border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;align-items:center;justify-content:space-between;padding-block:14px}
+.brand{font-family:var(--display);font-size:1.25rem;color:var(--ink);text-decoration:none}
+nav ul{display:flex;flex-wrap:wrap;gap:6px 20px;list-style:none;margin:0;padding:0}
+nav ul a{color:var(--ink);text-decoration:none;font-weight:600}
+nav ul a:hover{color:var(--chili)}
+.hero{background:var(--chili);color:var(--chili-ink)}
+.hero .wrap{padding-block:48px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:18px 32px;align-items:center}
+.hero .copy{display:grid;gap:18px;min-width:0}
+.logo{width:clamp(120px,22vw,220px);aspect-ratio:1;max-width:100%;border-radius:50%;border:3px dashed var(--chili-ink);display:grid;place-items:center;text-align:center;font-weight:800;font-size:.9rem;padding:12px;opacity:.9}
+@media (max-width:640px){.hero .wrap{grid-template-columns:1fr}.logo{order:-1}}
+.hero h1{font-size:clamp(2.4rem,7vw,4.4rem);letter-spacing:.01em}
+.hero p{max-width:58ch;margin:0;font-size:1.15rem}
+.btns{display:flex;flex-wrap:wrap;gap:12px;margin-top:6px}
+.btn{display:inline-block;padding:.7em 1.2em;border-radius:6px;font-weight:800;text-decoration:none;border:2px solid var(--chili-ink)}
+.btn.solid{background:var(--chili-ink);color:var(--chili)} .btn.ghost{color:var(--chili-ink)}
+section .wrap{padding-block:56px;display:grid;gap:24px}
+.eyebrow{text-transform:uppercase;letter-spacing:.12em;font-size:.8rem;font-weight:800;color:var(--chili);margin:0}
+h2{font-size:clamp(1.8rem,4.5vw,2.6rem)}
+.lede{max-width:62ch;margin:0;color:var(--muted)}
+.sauces{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:18px}
+.tag{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:20px;display:grid;gap:10px;align-content:start;min-width:0}
+.tag h3{font-size:1.35rem}
+.tag p{margin:0;color:var(--muted)}
+.meter{display:flex;align-items:center;gap:6px;font-size:.85rem;font-weight:600}
+.meter span{width:16px;height:16px;border-radius:50%;border:2px solid var(--heat)}
+.meter span.on{background:var(--heat)}
+.price{display:flex;justify-content:space-between;align-items:baseline;border-top:1px dashed var(--line);padding-top:10px;font-variant-numeric:tabular-nums}
+.price strong{font-size:1.3rem}
+.alt{background:var(--card);border-block:1px solid var(--line)}
+.markets{list-style:none;margin:0;padding:0;display:grid;gap:0}
+.markets li{display:grid;grid-template-columns:minmax(0,9rem) minmax(0,1fr);gap:4px 20px;padding:16px 0;border-bottom:1px solid var(--line)}
+.markets .day{font-weight:800}
+.markets .where{min-width:0}
+.markets .where small{display:block;color:var(--muted)}
+.order{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px}
+.order div{min-width:0}
+.order h3{font-size:1.25rem;margin-bottom:6px}
+.order p{margin:0}
+.email{font-weight:800;word-break:break-all;user-select:all}
+footer{border-top:1px solid var(--line);color:var(--muted);font-size:.9rem}
+footer .wrap{padding-block:28px;display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between}
+@media (max-width:480px){.markets li{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div class="draft"><div class="wrap"><strong>Draft preview.</strong> Highlighted text in [brackets] is a placeholder waiting for Travis's real details.</div></div>
+
+<nav aria-label="Main"><div class="wrap">
+  <a class="brand" href="#top">Donkey Punch</a>
+  <ul>
+    <li><a href="#sauces">Our sauces</a></li>
+    <li><a href="#markets">Find us</a></li>
+    <li><a href="#order">Order</a></li>
+  </ul>
+</div></nav>
+
+<header class="hero" id="top"><div class="wrap">
+  <div class="copy">
+  <h1>Donkey Punch Hot&nbsp;Sauce</h1>
+  <p>Small-batch hot sauce with a kick, made by hand <span class="ph">[in your town]</span> and sold at local farmers markets.</p>
+  <div class="btns">
+    <a class="btn solid" href="#markets">See this week's markets</a>
+    <a class="btn ghost" href="#order">Order a bottle</a>
+  </div>
+  </div>
+  <div class="logo" role="img" aria-label="Boxing Donkey logo goes here">[Boxing Donkey logo]</div>
+</div></header>
+
+<section id="sauces"><div class="wrap">
+  <p class="eyebrow">The lineup</p>
+  <h2>Pick your punch</h2>
+  <p class="lede">Every bottle is rated on our five-pepper heat scale, so you know what you're getting into.</p>
+  <div class="sauces">
+    <article class="tag">
+      <h3><span class="ph">[Sauce name]</span></h3>
+      <div class="meter" aria-label="Heat 2 of 5"><span class="on"></span><span class="on"></span><span></span><span></span><span></span>&nbsp;Mild kick</div>
+      <p><span class="ph">[Peppers and flavor, one line]</span></p>
+      <div class="price"><span><span class="ph">[5 oz]</span></span><strong><span class="ph">[$__]</span></strong></div>
+    </article>
+    <article class="tag">
+      <h3><span class="ph">[Sauce name]</span></h3>
+      <div class="meter" aria-label="Heat 3 of 5"><span class="on"></span><span class="on"></span><span class="on"></span><span></span><span></span>&nbsp;Solid punch</div>
+      <p><span class="ph">[Peppers and flavor, one line]</span></p>
+      <div class="price"><span><span class="ph">[5 oz]</span></span><strong><span class="ph">[$__]</span></strong></div>
+    </article>
+    <article class="tag">
+      <h3><span class="ph">[Sauce name]</span></h3>
+      <div class="meter" aria-label="Heat 5 of 5"><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span>&nbsp;Knockout</div>
+      <p><span class="ph">[Peppers and flavor, one line]</span></p>
+      <div class="price"><span><span class="ph">[5 oz]</span></span><strong><span class="ph">[$__]</span></strong></div>
+    </article>
+  </div>
+</div></section>
+
+<section id="markets" class="alt"><div class="wrap">
+  <p class="eyebrow">Where to find us</p>
+  <h2>Farmers markets</h2>
+  <p class="lede">The easiest way to get our sauce is to meet us at one of our local markets. Come taste before you buy.</p>
+  <ul class="markets">
+    <li><span class="day"><span class="ph">[Saturdays]</span></span><span class="where"><span class="ph">[Market name]</span><small><span class="ph">[8am–1pm · address]</span></small></span></li>
+    <li><span class="day"><span class="ph">[Sundays]</span></span><span class="where"><span class="ph">[Market name]</span><small><span class="ph">[9am–2pm · address]</span></small></span></li>
+  </ul>
+</div></section>
+
+<section id="order"><div class="wrap">
+  <p class="eyebrow">Can't make it to a market?</p>
+  <h2>Order a bottle</h2>
+  <div class="order">
+    <div>
+      <h3>Email us</h3>
+      <p>Send your order to <span class="email">DonkeyPunchHotSauce@Gmail.com</span> and we'll set up shipping or local delivery.</p>
+    </div>
+    <div>
+      <h3>Pay online</h3>
+      <p><span class="ph">[Optional: a Square or Stripe payment link goes here]</span></p>
+    </div>
+  </div>
+</div></section>
+
+<footer><div class="wrap">
+  <span>© 2026 Donkey Punch Hot Sauce</span>
+  <span><span class="ph">[Instagram]</span> · <span class="ph">[Facebook]</span></span>
+</div></footer>
+</body>
+</html>
