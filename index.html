@@ -79,6 +79,36 @@ h2{font-size:clamp(1.8rem,4.5vw,2.6rem)}
 footer{border-top:1px solid var(--line);color:var(--muted);font-size:.9rem}
 footer .wrap{padding-block:28px;display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between}
 @media (max-width:480px){.markets li{grid-template-columns:1fr}}
+
+/* Order pop-up */
+.order-btn{font:inherit;font-weight:800;cursor:pointer;padding:.7em 1.2em;border-radius:6px;border:2px solid var(--chili);background:var(--chili);color:var(--chili-ink)}
+.order-btn.small{padding:.4em .8em;font-size:.9rem}
+.hero .order-btn{background:transparent;border-color:var(--chili-ink)}
+dialog#order-dialog{border:none;border-radius:12px;padding:0;width:min(560px,calc(100vw - 32px));max-height:calc(100dvh - 32px);background:var(--card);color:var(--ink);box-shadow:0 20px 60px rgba(10,20,50,.35)}
+dialog#order-dialog::backdrop{background:rgba(10,20,50,.55)}
+.dlg{display:grid;gap:18px;padding:24px}
+.dlg-head{display:flex;justify-content:space-between;align-items:start;gap:12px}
+.dlg-head h2{font-size:1.6rem}
+.x{font:inherit;font-size:1.5rem;line-height:1;background:none;border:none;color:var(--muted);cursor:pointer;padding:4px 8px}
+.qty-list{display:grid;gap:8px;margin:0;padding:0;border:none}
+.qty-row{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid var(--line)}
+.qty-row label{font-weight:600;min-width:0}
+.qty-row small{display:block;color:var(--muted);font-weight:400}
+.stepper{display:flex;align-items:center;gap:6px}
+.stepper button{font:inherit;font-weight:800;width:36px;height:36px;border-radius:50%;border:2px solid var(--chili);background:none;color:var(--chili);cursor:pointer}
+.stepper input{width:3em;text-align:center;font:inherit;font-weight:800;padding:6px;border:1px solid var(--line);border-radius:6px;background:var(--paper);color:var(--ink);font-variant-numeric:tabular-nums}
+.field{display:grid;gap:6px}
+.field label,.field legend{font-weight:600}
+.field input:not([type=radio]),.field textarea{font:inherit;padding:10px;border:1px solid var(--line);border-radius:6px;background:var(--paper);color:var(--ink);width:100%}
+.radios{display:flex;flex-wrap:wrap;gap:8px 20px;border:none;margin:0;padding:0}
+.radios label{font-weight:400;display:flex;gap:8px;align-items:center}
+.total{display:flex;justify-content:space-between;align-items:baseline;background:var(--paper);border-radius:8px;padding:12px 14px;font-variant-numeric:tabular-nums}
+.total strong{font-size:1.4rem}
+.total small{display:block;color:var(--muted)}
+.dlg-actions{display:flex;flex-wrap:wrap;gap:10px}
+.link-btn{font:inherit;font-weight:600;background:none;border:none;color:var(--chili);text-decoration:underline;cursor:pointer;padding:.7em .4em}
+.dlg-msg{margin:0;color:var(--muted);font-size:.95rem}
+.dlg-msg.err{color:var(--heat);font-weight:600}
 </style>
 </head>
 <body>
@@ -100,7 +130,7 @@ footer .wrap{padding-block:28px;display:flex;flex-wrap:wrap;gap:8px 24px;justify
   <p>Small-batch Texas hot sauce with a kick, cooked in Pearland. Find us every Sunday at the Alamo Heights Farmers Market in San Antonio.</p>
   <div class="btns">
     <a class="btn solid" href="#markets">Where to find us</a>
-    <a class="btn ghost" href="#order">Order a bottle</a>
+    <button type="button" class="order-btn" data-open-order>Order a bottle</button>
   </div>
   </div>
   <img class="logo" src="images/donkey-punch-badge.jpg" width="1080" height="1080" alt="Donkey Punch Hot Sauce badge: a boxing donkey in a red, white and blue diamond, with banners reading Est. 2022, Fight Fire With Fire, and Pearland, TX">
@@ -115,31 +145,31 @@ footer .wrap{padding-block:28px;display:flex;flex-wrap:wrap;gap:8px 24px;justify
       <h3>Smoked Poblano</h3>
       <div class="meter" aria-label="Heat 2 of 5: Mild"><span class="on"></span><span class="on"></span><span></span><span></span><span></span>&nbsp;Mild</div>
       <p>Smoked pecan, tomatillo and jalapeños for a mild kick.</p>
-      <div class="price"><span>5 oz</span><strong>$10</strong></div>
+      <div class="price"><span>5 oz · <strong>$10</strong></span><button type="button" class="order-btn small" data-open-order="Smoked Poblano">Add to order</button></div>
     </article>
     <article class="tag">
       <h3>Texas RedHot</h3>
       <div class="meter" aria-label="Heat 3 of 5: Medium"><span class="on"></span><span class="on"></span><span class="on"></span><span></span><span></span>&nbsp;Medium</div>
       <p>Guajillo and árbol peppers with garlic and onions.</p>
-      <div class="price"><span>5 oz</span><strong>$10</strong></div>
+      <div class="price"><span>5 oz · <strong>$10</strong></span><button type="button" class="order-btn small" data-open-order="Texas RedHot">Add to order</button></div>
     </article>
     <article class="tag">
       <h3>Agent Orange</h3>
       <div class="meter" aria-label="Heat 4 of 5: Hot"><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span></span>&nbsp;Hot</div>
       <p>Sweet potato, cracked black pepper and roasted habaneros.</p>
-      <div class="price"><span>5 oz</span><strong>$10</strong></div>
+      <div class="price"><span>5 oz · <strong>$10</strong></span><button type="button" class="order-btn small" data-open-order="Agent Orange">Add to order</button></div>
     </article>
     <article class="tag">
       <h3>Tropic Thunder</h3>
       <div class="meter" aria-label="Heat 4 of 5: Hot"><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span></span>&nbsp;Hot</div>
       <p>Passion fruit, mango, guava and fresh habanero.</p>
-      <div class="price"><span>5 oz</span><strong>$10</strong></div>
+      <div class="price"><span>5 oz · <strong>$10</strong></span><button type="button" class="order-btn small" data-open-order="Tropic Thunder">Add to order</button></div>
     </article>
     <article class="tag">
       <h3>Boo-Berry</h3>
       <div class="meter" aria-label="Heat 4 of 5: Hot"><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span></span>&nbsp;Hot</div>
       <p>Blueberry, lemon and ghost pepper.</p>
-      <div class="price"><span>5 oz</span><strong>$10</strong></div>
+      <div class="price"><span>5 oz · <strong>$10</strong></span><button type="button" class="order-btn small" data-open-order="Boo-Berry">Add to order</button></div>
     </article>
   </div>
 </div></section>
@@ -158,8 +188,9 @@ footer .wrap{padding-block:28px;display:flex;flex-wrap:wrap;gap:8px 24px;justify
   <h2>Order a bottle</h2>
   <div class="order">
     <div>
-      <h3>Email us</h3>
-      <p>Send your order to <span class="email">DonkeyPunchHotSauce@Gmail.com</span> with the sauces you want and your address. We'll reply with your total.</p>
+      <h3>Email us your order</h3>
+      <p>Pick your sauces and we'll write the email for you. We'll reply to confirm your total. You can also write to <span class="email">DonkeyPunchHotSauce@Gmail.com</span> directly.</p>
+      <p style="margin-top:14px"><button type="button" class="order-btn" data-open-order>Start an order</button></p>
     </div>
     <div>
       <h3>Shipping in Texas</h3>
@@ -172,5 +203,127 @@ footer .wrap{padding-block:28px;display:flex;flex-wrap:wrap;gap:8px 24px;justify
   <span>© 2026 Donkey Punch Hot Sauce</span>
   <span><a href="https://www.instagram.com/donkeypunchhotsauce/">Instagram</a> · <a href="https://www.facebook.com/DonkeyPunchHotSauce">Facebook</a> · @DonkeyPunchHotSauce</span>
 </div></footer>
+
+<dialog id="order-dialog" aria-labelledby="order-title">
+  <form class="dlg" id="order-form" novalidate>
+    <div class="dlg-head">
+      <h2 id="order-title">Build your order</h2>
+      <button type="button" class="x" data-close aria-label="Close">×</button>
+    </div>
+    <fieldset class="qty-list"><legend class="eyebrow">Sauces · any 3 for $25</legend>
+        <div class="qty-row">
+          <label for="q-0">Smoked Poblano<small>5 oz · $10</small></label>
+          <div class="stepper"><button type="button" data-step="-1" data-for="q-0" aria-label="One less Smoked Poblano">−</button><input id="q-0" name="Smoked Poblano" type="number" inputmode="numeric" min="0" max="48" value="0"><button type="button" data-step="1" data-for="q-0" aria-label="One more Smoked Poblano">+</button></div>
+        </div>
+        <div class="qty-row">
+          <label for="q-1">Texas RedHot<small>5 oz · $10</small></label>
+          <div class="stepper"><button type="button" data-step="-1" data-for="q-1" aria-label="One less Texas RedHot">−</button><input id="q-1" name="Texas RedHot" type="number" inputmode="numeric" min="0" max="48" value="0"><button type="button" data-step="1" data-for="q-1" aria-label="One more Texas RedHot">+</button></div>
+        </div>
+        <div class="qty-row">
+          <label for="q-2">Agent Orange<small>5 oz · $10</small></label>
+          <div class="stepper"><button type="button" data-step="-1" data-for="q-2" aria-label="One less Agent Orange">−</button><input id="q-2" name="Agent Orange" type="number" inputmode="numeric" min="0" max="48" value="0"><button type="button" data-step="1" data-for="q-2" aria-label="One more Agent Orange">+</button></div>
+        </div>
+        <div class="qty-row">
+          <label for="q-3">Tropic Thunder<small>5 oz · $10</small></label>
+          <div class="stepper"><button type="button" data-step="-1" data-for="q-3" aria-label="One less Tropic Thunder">−</button><input id="q-3" name="Tropic Thunder" type="number" inputmode="numeric" min="0" max="48" value="0"><button type="button" data-step="1" data-for="q-3" aria-label="One more Tropic Thunder">+</button></div>
+        </div>
+        <div class="qty-row">
+          <label for="q-4">Boo-Berry<small>5 oz · $10</small></label>
+          <div class="stepper"><button type="button" data-step="-1" data-for="q-4" aria-label="One less Boo-Berry">−</button><input id="q-4" name="Boo-Berry" type="number" inputmode="numeric" min="0" max="48" value="0"><button type="button" data-step="1" data-for="q-4" aria-label="One more Boo-Berry">+</button></div>
+        </div>
+    </fieldset>
+    <div class="field">
+      <label for="o-name">Your name</label>
+      <input id="o-name" name="name" autocomplete="name" required>
+    </div>
+    <fieldset class="field" style="border:none;margin:0;padding:0">
+      <legend>How do you want it?</legend>
+      <div class="radios">
+        <label><input type="radio" name="how" value="ship" checked> Ship it (Texas only)</label>
+        <label><input type="radio" name="how" value="pickup"> Pick up at the Sunday market</label>
+      </div>
+    </fieldset>
+    <div class="field" id="addr-field">
+      <label for="o-addr">Shipping address</label>
+      <textarea id="o-addr" name="address" rows="3" autocomplete="street-address"></textarea>
+    </div>
+    <div class="field">
+      <label for="o-notes">Anything else? (optional)</label>
+      <textarea id="o-notes" name="notes" rows="2"></textarea>
+    </div>
+    <div class="total" aria-live="polite">
+      <span><span id="o-count">0 bottles</span><small id="o-ship">Plus USPS Flat Rate shipping at cost</small></span>
+      <strong id="o-total">$0</strong>
+    </div>
+    <p class="dlg-msg" id="o-msg">This opens your email app with the order written out. Nothing is sent until you press Send there.</p>
+    <div class="dlg-actions">
+      <button type="submit" class="order-btn">Open email with my order</button>
+      <button type="button" class="link-btn" id="o-copy">Copy order text instead</button>
+    </div>
+  </form>
+</dialog>
+<script>
+(function(){
+  var EMAIL='DonkeyPunchHotSauce@Gmail.com';
+  var dlg=document.getElementById('order-dialog'), form=document.getElementById('order-form');
+  var qtys=[].slice.call(form.querySelectorAll('.qty-list input'));
+  var msg=document.getElementById('o-msg'), defaultMsg=msg.textContent;
+  function price(n){return Math.floor(n/3)*25+(n%3)*10;}
+  function val(i){var v=parseInt(i.value,10);return isNaN(v)||v<0?0:Math.min(v,48);}
+  function how(){return form.querySelector('input[name=how]:checked').value;}
+  function update(){
+    var n=qtys.reduce(function(t,i){return t+val(i);},0);
+    document.getElementById('o-count').textContent=n+(n===1?' bottle':' bottles');
+    document.getElementById('o-total').textContent='$'+price(n);
+    var ship=how()==='ship';
+    document.getElementById('o-ship').textContent=ship?'Plus USPS Flat Rate shipping at cost':'Pay at the market';
+    document.getElementById('addr-field').hidden=!ship;
+  }
+  function open(name){
+    if(name){qtys.forEach(function(i){if(i.name===name&&val(i)===0)i.value=1;});}
+    msg.textContent=defaultMsg;msg.className='dlg-msg';
+    update();
+    if(dlg.showModal)dlg.showModal();else dlg.setAttribute('open','');
+  }
+  document.querySelectorAll('[data-open-order]').forEach(function(b){
+    b.addEventListener('click',function(){open(b.getAttribute('data-open-order'));});
+  });
+  form.querySelector('[data-close]').addEventListener('click',function(){dlg.close();});
+  form.addEventListener('click',function(e){
+    var b=e.target.closest('[data-step]');if(!b)return;
+    var i=document.getElementById(b.getAttribute('data-for'));
+    i.value=Math.max(0,Math.min(48,val(i)+parseInt(b.getAttribute('data-step'),10)));update();
+  });
+  form.addEventListener('input',update);
+  function build(){
+    var n=0,lines=[];
+    qtys.forEach(function(i){var q=val(i);if(q){n+=q;lines.push('  '+q+' x '+i.name);}});
+    var name=form.elements.name.value.trim(), ship=how()==='ship', addr=form.elements.address.value.trim();
+    if(!n)return {err:'Add at least one bottle.'};
+    if(!name)return {err:'Add your name so we know who the order is for.'};
+    if(ship&&!addr)return {err:'Add a shipping address, or choose market pickup.'};
+    var body='Hi Donkey Punch,\n\nI\'d like to order:\n'+lines.join('\n')+
+      '\n\nTotal: '+n+(n===1?' bottle':' bottles')+', $'+price(n)+(ship?' plus USPS Flat Rate shipping':'')+
+      '\n\n'+(ship?'Please ship to:\n'+addr:'I\'ll pick up at the Alamo Heights Farmers Market on Sunday.')+
+      (form.elements.notes.value.trim()?'\n\nNotes: '+form.elements.notes.value.trim():'')+
+      '\n\nThanks,\n'+name;
+    return {subject:'Sauce order from '+name,body:body};
+  }
+  function fail(t){msg.textContent=t;msg.className='dlg-msg err';}
+  form.addEventListener('submit',function(e){
+    e.preventDefault();var o=build();if(o.err)return fail(o.err);
+    window.location.href='mailto:'+EMAIL+'?subject='+encodeURIComponent(o.subject)+'&body='+encodeURIComponent(o.body);
+    msg.textContent='Your email app should open with the order filled in. If nothing opened, use "Copy order text instead" and email it to '+EMAIL+'.';msg.className='dlg-msg';
+  });
+  document.getElementById('o-copy').addEventListener('click',function(){
+    var o=build();if(o.err)return fail(o.err);
+    var text='To: '+EMAIL+'\nSubject: '+o.subject+'\n\n'+o.body;
+    function ok(){msg.textContent='Copied. Paste it into an email to '+EMAIL+'.';msg.className='dlg-msg';}
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(ok,function(){fail('Copy failed. Email '+EMAIL+' directly.');});}
+    else fail('Copy is not supported here. Email '+EMAIL+' directly.');
+  });
+  form.querySelectorAll('input[name=how]').forEach(function(r){r.addEventListener('change',update);});
+})();
+</script>
 </body>
 </html>
